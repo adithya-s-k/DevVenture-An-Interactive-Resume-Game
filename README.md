@@ -5,3 +5,4 @@ I want all th people who come to my portofolio to have a fun experience so I wan
 - Gives them a challenge to complete
 - Shows My time line
 - Shows what i am currently working on and all my other projects..
+.
