@@ -1,0 +1,44 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "exportAsImage.useCurrentScale": true,
+    "fileStates": {
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/Pellet Town.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 431,
+                "y": 282
+            }
+        },
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/collisionTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/pokemonStyleGameTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "Game_map/collision.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Game_map/map.tmx": {
+            "expandedGroupLayers": [
+                10
+            ],
+            "scale": 4,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 257,
+                "y": 226.75
+            }
+        }
+    },
+    "openFiles": [
+    ],
+    "project": "Project_map.tiled-project",
+    "recentFiles": [
+        "Game_map/collision.tsx",
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/Pellet Town.tmx"
+    ]
+}
