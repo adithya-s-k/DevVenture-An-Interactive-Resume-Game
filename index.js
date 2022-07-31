@@ -2,13 +2,53 @@ const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d')
 
-
 canvas.width=1024
 canvas.height=576
-console.log(canvas)
 
-c.fillStyle = "white"
-c.fillRect(0,0,canvas.width,canvas.height)
+// creating an offset so that the map is centers
+const offset ={
+    x:-735,
+    y:-600
+}
+
+// collision mechanism
+
+const collisionMap = []//sd array representing the grid
+for(let i =0; i < collisions.length;i+=70){
+    collisionMap.push(collisions.slice(i,i+70))
+}
+// creating a class for the boundary taking in position and also for drawing
+class Boundary{
+    static width = 48
+    static height = 48
+    constructor({position}) {
+        this.position=position
+        this.width = 48
+        this.height = 48
+    }
+    draw(){
+        c.fillStyle ="red"
+        c.fillRect(this.position.x,this.position.y,this.width,this.height)
+    }
+}
+
+// creating a arr with all the boundary positions with height and width
+const boundaries = []
+
+collisionMap.forEach((row,i)=>{
+    row.forEach((column,j)=>{
+        if(column === 1025){
+        boundaries.push(
+            new Boundary({
+                position:{
+                    x : j*Boundary.width + offset.x,
+                    y : i*Boundary.height + offset.y
+                }
+            })
+        )}
+    })
+})
+
 
 const image = new Image();
 image.src = "./assets/images/map.png";
@@ -26,7 +66,7 @@ class Sprite{
     }
 }
 
-const background = new Sprite({position:{x:-735,y:-600},image:image})
+const background = new Sprite({position:offset,image:image})
 
 // image on load is required to load the image then render it on the canvae
 /*image.onload=()=>{
@@ -58,9 +98,22 @@ const keys={
     },
 }
 
+const testBoundary = new Boundary({
+    position:{
+        x:400,
+        y:400
+    }
+})
+
+const movables  = [background,testBoundary]
+
 function animate(){
     window.requestAnimationFrame(animate);
     background.draw()
+    // boundaries.forEach(boundary =>{
+    //     boundary.draw()
+    // })
+    testBoundary.draw()
     c.drawImage(playerImage,
         0,
         0,
@@ -71,10 +124,10 @@ function animate(){
         playerImage.width/4,
         playerImage.height)
     
-    if(keys.w.pressed && lastKey === "w"){background.position.y += 3 }
-    else if(keys.a.pressed && lastKey === "a"){background.position.x += 3 }
-    else if(keys.s.pressed && lastKey === "s"){background.position.y -= 3 }
-    else if(keys.d.pressed && lastKey === "d"){background.position.x -= 3 }
+    if(keys.w.pressed && lastKey === "w"){movables.forEach(movable=>{movable.position.y += 10})}
+    else if(keys.a.pressed && lastKey === "a"){movables.forEach(movable=>{movable.position.x += 10})}
+    else if(keys.s.pressed && lastKey === "s"){movables.forEach(movable=>{movable.position.y -= 10})}
+    else if(keys.d.pressed && lastKey === "d"){movables.forEach(movable=>{movable.position.x -= 10})}
 }
 animate()
 
@@ -97,7 +150,7 @@ window.addEventListener('keydown',(e)=>{
             lastKey = "d";
             break
     }
-    console.log(keys)
+    console.log(e.key)
 })
 
 window.addEventListener('keyup',(e)=>{
