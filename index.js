@@ -57,16 +57,47 @@ const playerImage = new Image();
 playerImage.src = "./assets/images/playerDown.png";
 
 class Sprite{
-    constructor({position,velocity,image}){
+    constructor({position,velocity,image,frames = {max:1}}){
         this.position = position;
         this.image = image
+        this.frames = frames
+        this.width = this.image.width/this.frames.max
+        this.height = this.image.height
+        console.log(this.width)
+        console.log(this.height)
+        
     }
     draw(){
-        c.drawImage(this.image,this.position.x,this.position.y)
+        c.drawImage(this.image,
+            0,
+            0,
+            this.image.width/this.frames.max,
+            this.image.height,
+            this.position.x,
+            this.position.y,
+            this.image.width/this.frames.max,
+            this.image.height)
     }
 }
 
 const background = new Sprite({position:offset,image:image})
+
+// canvas.width/2 - this.image.width/8, we are going to replace it with static value
+// which is nothing but width and height of the player image in this cae
+//it is 192 and 68
+// canvas.height/2 - this.image.height/2, 
+
+const player = new Sprite({
+    position:{
+        x:canvas.width/2 - 192/8,
+        y:canvas.height/2 - 68/2
+    },
+    image :playerImage,
+    frames:{
+        max:4
+    }
+})
+
 
 // image on load is required to load the image then render it on the canvae
 /*image.onload=()=>{
@@ -98,32 +129,33 @@ const keys={
     },
 }
 
-const testBoundary = new Boundary({
-    position:{
-        x:400,
-        y:400
-    }
-})
+const movables  = [background,...boundaries]
 
-const movables  = [background,testBoundary]
+function rectangularCollision({ rectangle1, rectangle2 }) {
+    return (
+        rectangle1.position.x + rectangle1.width >= rectangle2.position.x &&
+        rectangle1.position.x <= rectangle2.position.x + rectangle2.width &&
+        rectangle1.position.y <= rectangle2.position.y + rectangle2.height &&
+        rectangle1.position.y + rectangle1.height >= rectangle2.position.y
+    )
+}
 
 function animate(){
     window.requestAnimationFrame(animate);
     background.draw()
-    // boundaries.forEach(boundary =>{
-    //     boundary.draw()
-    // })
-    testBoundary.draw()
-    c.drawImage(playerImage,
-        0,
-        0,
-        playerImage.width/4,
-        playerImage.height,
-        canvas.width/2 - playerImage.width/8,
-        canvas.height/2 - playerImage.height/2,
-        playerImage.width/4,
-        playerImage.height)
+    boundaries.forEach(boundary =>{
+        boundary.draw()
+        if(rectangularCollision({
+            rectangle1:player,
+            rectangle2:boundary
+        })){
+            console.log('collision')
+        }
+    })
+    player.draw()
+
     
+
     if(keys.w.pressed && lastKey === "w"){movables.forEach(movable=>{movable.position.y += 10})}
     else if(keys.a.pressed && lastKey === "a"){movables.forEach(movable=>{movable.position.x += 10})}
     else if(keys.s.pressed && lastKey === "s"){movables.forEach(movable=>{movable.position.y -= 10})}
@@ -150,7 +182,6 @@ window.addEventListener('keydown',(e)=>{
             lastKey = "d";
             break
     }
-    console.log(e.key)
 })
 
 window.addEventListener('keyup',(e)=>{
@@ -168,5 +199,4 @@ window.addEventListener('keyup',(e)=>{
             keys.d.pressed = false;
             break
     }
-    console.log(keys)
 })
