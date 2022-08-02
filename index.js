@@ -27,7 +27,7 @@ class Boundary{
         this.height = 48
     }
     draw(){
-        c.fillStyle ="red"
+        c.fillStyle ="rgba(255,0,0,0)"
         c.fillRect(this.position.x,this.position.y,this.width,this.height)
     }
 }
@@ -57,12 +57,12 @@ const playerImage = new Image();
 playerImage.src = "./assets/images/playerDown.png";
 
 class Sprite{
-    constructor({position,velocity,image,frames = {max:1}}){
+    constructor({position,velocity,image,width,height,frames = {max:1}}){
         this.position = position;
         this.image = image
         this.frames = frames
-        this.width = this.image.width/this.frames.max
-        this.height = this.image.height
+        this.width = width/this.frames.max
+        this.height = height
         console.log(this.width)
         console.log(this.height)
         
@@ -80,7 +80,13 @@ class Sprite{
     }
 }
 
-const background = new Sprite({position:offset,image:image})
+const background = new Sprite({
+    position:offset,
+    image:image,
+    // resolution of the image
+    width:3360,
+    height:1920
+})
 
 // canvas.width/2 - this.image.width/8, we are going to replace it with static value
 // which is nothing but width and height of the player image in this cae
@@ -95,7 +101,9 @@ const player = new Sprite({
     image :playerImage,
     frames:{
         max:4
-    }
+    },
+    width:192,
+    height:68
 })
 
 
@@ -136,6 +144,7 @@ const softedge = {
     x:20,
     y:20
 }
+const speed = 10
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
@@ -172,7 +181,7 @@ function animate(){
                 ...boundary,
                 position: {
                     x: boundary.position.x,
-                    y: boundary.position.y + 3
+                    y: boundary.position.y + speed
                 }
                 }
             })
@@ -184,7 +193,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.y += 3
+            movable.position.y += speed
             })
         }    
 
@@ -197,7 +206,7 @@ function animate(){
                 rectangle2: {
                 ...boundary,
                 position: {
-                    x: boundary.position.x + 3,
+                    x: boundary.position.x + speed,
                     y: boundary.position.y
                 }
                 }
@@ -210,7 +219,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.x += 3
+            movable.position.x += speed
             })
         } 
         else if (keys.s.pressed && lastKey === 's') {
@@ -224,7 +233,7 @@ function animate(){
                 ...boundary,
                 position: {
                     x: boundary.position.x,
-                    y: boundary.position.y - 3
+                    y: boundary.position.y - speed
                 }
                 }
             })
@@ -236,7 +245,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.y -= 3
+            movable.position.y -= speed
             })
         } 
     else if (keys.d.pressed && lastKey === 'd') {
@@ -249,7 +258,7 @@ function animate(){
                 rectangle2: {
                 ...boundary,
                 position: {
-                    x: boundary.position.x - 3,
+                    x: boundary.position.x - speed,
                     y: boundary.position.y
                 }
                 }
@@ -262,7 +271,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.x -= 3
+            movable.position.x -= speed
             })
         }
 
