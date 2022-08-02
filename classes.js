@@ -7,11 +7,10 @@ class Boundary{
         this.height = 48
     }
     draw(){
-        c.fillStyle ="rgba(255,0,0,0)"
+        c.fillStyle ="rgba(255,0,0,0.2)"
         c.fillRect(this.position.x,this.position.y,this.width,this.height)
     }
 }
-
 
 class Sprite{
     constructor({position,velocity,image,width,height,frames = {max:1}}){

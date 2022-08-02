@@ -40,6 +40,21 @@ image.src = "./assets/images/map.png";
 const playerImage = new Image();
 playerImage.src = "./assets/images/playerDown.png";
 
+const foregroundImage = new Image()
+foregroundImage.src = './assets/images/foregroundObjects.png'
+
+const playerDownImage = new Image()
+playerDownImage.src = './assets/images/playerDown.png'
+
+const playerUpImage = new Image()
+playerUpImage.src = './assets/images/playerUp.png'
+
+const playerLeftImage = new Image()
+playerLeftImage.src = './assets/images/playerLeft.png'
+
+const playerRightImage = new Image()
+playerRightImage.src = './assets/images/playerRight.png'
+
 const background = new Sprite({
     position:offset,
     image:image,
@@ -59,26 +74,20 @@ const player = new Sprite({
     },
     image :playerImage,
     frames:{
-        max:4
+        max:4,
+        hold: 10
     },
     width:192,
-    height:68
+    height:68,
 })
 
-
-// image on load is required to load the image then render it on the canvae
-/*image.onload=()=>{
-    c.drawImage(image,-735,-600)
-    c.drawImage(playerImage,
-        0,
-        0,
-        playerImage.width/4,
-        playerImage.height,
-        canvas.width/2 - playerImage.width/8,
-        canvas.height/2 - playerImage.height/2,
-        playerImage.width/4,
-        playerImage.height)
-}*/
+const foreground = new Sprite({
+    position: {
+      x: offset.x,
+      y: offset.y
+    },
+    image: foregroundImage
+  })
 
 let lastKey = '';
 const keys={
@@ -96,14 +105,14 @@ const keys={
     },
 }
 
-const movables  = [background,...boundaries]
+const movables  = [background,...boundaries,foreground]
 
 // softedge is created to make the boundary smaller thus given more movement space to the player
 const softedge = {
     x:25,
     y:25
 }
-const speed = 6
+const speed = 7
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
@@ -127,6 +136,7 @@ function animate(){
         }
     })
     player.draw()
+    foreground.draw()
 
     let moving = true
 
