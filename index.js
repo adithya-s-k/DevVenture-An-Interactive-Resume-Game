@@ -299,6 +299,49 @@ document.querySelectorAll('button').forEach((button) =>{
 })
 
 document.querySelectorAll('button').forEach((button) =>{
+    button.addEventListener('touchstart',(e) =>{
+        switch(e.currentTarget.innerHTML){
+            case("UP"):
+                keys.w.pressed = false;
+                break
+            case("LEFT"):
+                keys.a.pressed = false;
+                break
+            case("DOWN"):
+                keys.s.pressed = false;
+                break
+            case("RIGHT"):
+                keys.d.pressed = false;
+
+                break
+        }
+    })
+})
+
+document.querySelectorAll('button').forEach((button) =>{
+    button.addEventListener('touchend',(e) =>{
+        switch(e.currentTarget.innerHTML){
+            case("UP"):
+                keys.w.pressed = true;
+                lastKey = "w";
+                break
+            case("LEFT"):
+                keys.a.pressed = true;
+                lastKey  = "a";
+                break
+            case("DOWN"):
+                keys.s.pressed = true;
+                lastKey = "s";
+                break
+            case("RIGHT"):
+                keys.d.pressed = true;
+                lastKey = "d";
+                break
+        }
+    })
+})
+
+document.querySelectorAll('button').forEach((button) =>{
     button.addEventListener('mouseup',(e) =>{
         switch(e.currentTarget.innerHTML){
             case("UP"):
