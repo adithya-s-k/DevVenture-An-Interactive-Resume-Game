@@ -2,39 +2,23 @@ const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d')
 
-canvas.width=1024
-canvas.height=576
+canvas.width=window.innerWidth-5
+canvas.height=window.innerHeight-5
 
 // creating an offset so that the map is centers
+// made the offset of the background responsive and will always be in center no matter the screen size
+
 const offset ={
-    x:-735,
-    y:-600
+    x:-735+((canvas.width-1024)/2),
+    y:-600+((canvas.height-576)/2),
 }
-
 // collision mechanism
-
-const collisionMap = []//sd array representing the grid
+const collisionMap = []//2d array representing the grid
 for(let i =0; i < collisions.length;i+=70){
     collisionMap.push(collisions.slice(i,i+70))
 }
-// creating a class for the boundary taking in position and also for drawing
-class Boundary{
-    static width = 48
-    static height = 48
-    constructor({position}) {
-        this.position=position
-        this.width = 48
-        this.height = 48
-    }
-    draw(){
-        c.fillStyle ="red"
-        c.fillRect(this.position.x,this.position.y,this.width,this.height)
-    }
-}
-
 // creating a arr with all the boundary positions with height and width
 const boundaries = []
-
 collisionMap.forEach((row,i)=>{
     row.forEach((column,j)=>{
         if(column === 1025){
@@ -56,35 +40,16 @@ image.src = "./assets/images/map.png";
 const playerImage = new Image();
 playerImage.src = "./assets/images/playerDown.png";
 
-class Sprite{
-    constructor({position,velocity,image,frames = {max:1}}){
-        this.position = position;
-        this.image = image
-        this.frames = frames
-        this.width = this.image.width/this.frames.max
-        this.height = this.image.height
-        console.log(this.width)
-        console.log(this.height)
-        
-    }
-    draw(){
-        c.drawImage(this.image,
-            0,
-            0,
-            this.image.width/this.frames.max,
-            this.image.height,
-            this.position.x,
-            this.position.y,
-            this.image.width/this.frames.max,
-            this.image.height)
-    }
-}
-
-const background = new Sprite({position:offset,image:image})
+const background = new Sprite({
+    position:offset,
+    image:image,
+    // resolution of the image
+    width:3360,
+    height:1920
+})
 
 // canvas.width/2 - this.image.width/8, we are going to replace it with static value
-// which is nothing but width and height of the player image in this cae
-//it is 192 and 68
+// which is nothing but width and height of the player image in this case it is 192 and 68
 // canvas.height/2 - this.image.height/2, 
 
 const player = new Sprite({
@@ -95,7 +60,9 @@ const player = new Sprite({
     image :playerImage,
     frames:{
         max:4
-    }
+    },
+    width:192,
+    height:68
 })
 
 
@@ -133,9 +100,10 @@ const movables  = [background,...boundaries]
 
 // softedge is created to make the boundary smaller thus given more movement space to the player
 const softedge = {
-    x:20,
-    y:20
+    x:25,
+    y:25
 }
+const speed = 6
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
@@ -172,7 +140,7 @@ function animate(){
                 ...boundary,
                 position: {
                     x: boundary.position.x,
-                    y: boundary.position.y + 3
+                    y: boundary.position.y + speed
                 }
                 }
             })
@@ -184,7 +152,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.y += 3
+            movable.position.y += speed
             })
         }    
 
@@ -197,7 +165,7 @@ function animate(){
                 rectangle2: {
                 ...boundary,
                 position: {
-                    x: boundary.position.x + 3,
+                    x: boundary.position.x + speed,
                     y: boundary.position.y
                 }
                 }
@@ -210,7 +178,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.x += 3
+            movable.position.x += speed
             })
         } 
         else if (keys.s.pressed && lastKey === 's') {
@@ -224,7 +192,7 @@ function animate(){
                 ...boundary,
                 position: {
                     x: boundary.position.x,
-                    y: boundary.position.y - 3
+                    y: boundary.position.y - speed
                 }
                 }
             })
@@ -236,7 +204,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.y -= 3
+            movable.position.y -= speed
             })
         } 
     else if (keys.d.pressed && lastKey === 'd') {
@@ -249,7 +217,7 @@ function animate(){
                 rectangle2: {
                 ...boundary,
                 position: {
-                    x: boundary.position.x - 3,
+                    x: boundary.position.x - speed,
                     y: boundary.position.y
                 }
                 }
@@ -262,7 +230,7 @@ function animate(){
     
         if (moving)
             movables.forEach((movable) => {
-            movable.position.x -= 3
+            movable.position.x -= speed
             })
         }
 
