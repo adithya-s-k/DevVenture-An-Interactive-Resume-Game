@@ -33,6 +33,24 @@ collisionMap.forEach((row,i)=>{
     })
 })
 
+const teleportMap = []
+for(let i =0; i < teleport.length;i+=70){
+    teleportMap.push(teleport.slice(i,i+70))
+}
+const teleports = []
+teleportMap.forEach((row,i)=>{
+    row.forEach((column,j)=>{
+        if(column === 2002){
+        teleports.push(
+            new Boundary({
+                position:{
+                    x : j*Boundary.width + offset.x,
+                    y : i*Boundary.height + offset.y
+                }
+            })
+        )}
+    })
+})
 
 const image = new Image();
 image.src = "./assets/images/map.png";
@@ -108,9 +126,12 @@ const keys={
     d:{
         pressed:false
     },
+    x:{
+        pressed:false
+    },
 }
 
-const movables  = [background,...boundaries,foreground]
+const movables  = [background,...boundaries,foreground,...teleports]
 
 // softedge is created to make the boundary smaller thus given more movement space to the player
 const softedge = {
@@ -128,6 +149,8 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
     )
 }
 
+let tp = false
+
 function animate(){
     window.requestAnimationFrame(animate);
     background.draw()
@@ -140,22 +163,20 @@ function animate(){
             console.log('collision')
         }
     })
+    teleports.forEach(pad =>{
+        pad.draw()
+        if(rectangularCollision({
+            rectangle1:player,
+            rectangle2:pad
+        })){
+            if(keys.x.pressed){
+                location.href = 'html2.html'
+            }
+        
+        }
+    })
     player.draw()
-    function moveup() {
-        keys.w.pressed = true;
-      }
-      
-      function movedown() {
-        keys.s.pressed = true;
-      }
-      
-      function moveleft() {
-        keys.a.pressed = true;
-      }
-      
-      function moveright() {
-        keys.d.pressed = true;
-      }
+
 
     let moving = true
     player.moving = false
@@ -275,6 +296,70 @@ function animate(){
 }
 animate()
 
+
+document.querySelectorAll('button').forEach((button) =>{
+    button.addEventListener('touchstart',(e) =>{
+        switch(e.currentTarget.innerHTML){
+            case("UP"):
+                keys.w.pressed = true;
+                break
+            case("LEFT"):
+                keys.a.pressed = true;
+                break
+            case("DOWN"):
+                keys.s.pressed = true;
+                break
+            case("RIGHT"):
+                keys.d.pressed = true;
+
+                break
+        }
+    })
+})
+document.querySelectorAll('button').forEach((button) =>{
+    button.addEventListener('touchmove',(e) =>{
+        switch(e.currentTarget.innerHTML){
+            case("UP"):
+                keys.w.pressed = true;
+                break
+            case("LEFT"):
+                keys.a.pressed = true;
+                break
+            case("DOWN"):
+                keys.s.pressed = true;
+                break
+            case("RIGHT"):
+                keys.d.pressed = true;
+
+                break
+        }
+    })
+})
+
+
+// document.querySelectorAll('button').forEach((button) =>{
+//     button.addEventListener('touchend',(e) =>{
+//         switch(e.currentTarget.innerHTML){
+//             case("UP"):
+//                 keys.w.pressed = false;
+//                 lastKey = "w";
+//                 break
+//             case("LEFT"):
+//                 keys.a.pressed = false;
+//                 lastKey  = "a";
+//                 break
+//             case("DOWN"):
+//                 keys.s.pressed = false;
+//                 lastKey = "s";
+//                 break
+//             case("RIGHT"):
+//                 keys.d.pressed = false;
+//                 lastKey = "d";
+//                 break
+//         }
+//     })
+// })
+
 document.querySelectorAll('button').forEach((button) =>{
     button.addEventListener('mousedown',(e) =>{
         switch(e.currentTarget.innerHTML){
@@ -298,48 +383,6 @@ document.querySelectorAll('button').forEach((button) =>{
     })
 })
 
-document.querySelectorAll('button').forEach((button) =>{
-    button.addEventListener('touchstart',(e) =>{
-        switch(e.currentTarget.innerHTML){
-            case("UP"):
-                keys.w.pressed = false;
-                break
-            case("LEFT"):
-                keys.a.pressed = false;
-                break
-            case("DOWN"):
-                keys.s.pressed = false;
-                break
-            case("RIGHT"):
-                keys.d.pressed = false;
-
-                break
-        }
-    })
-})
-
-document.querySelectorAll('button').forEach((button) =>{
-    button.addEventListener('touchend',(e) =>{
-        switch(e.currentTarget.innerHTML){
-            case("UP"):
-                keys.w.pressed = true;
-                lastKey = "w";
-                break
-            case("LEFT"):
-                keys.a.pressed = true;
-                lastKey  = "a";
-                break
-            case("DOWN"):
-                keys.s.pressed = true;
-                lastKey = "s";
-                break
-            case("RIGHT"):
-                keys.d.pressed = true;
-                lastKey = "d";
-                break
-        }
-    })
-})
 
 document.querySelectorAll('button').forEach((button) =>{
     button.addEventListener('mouseup',(e) =>{
@@ -380,6 +423,9 @@ window.addEventListener('keydown',(e)=>{
             keys.d.pressed = true;
             lastKey = "d";
             break
+        case("x"):
+            keys.x.pressed = true;
+            break
     }
     
 })
@@ -397,6 +443,9 @@ window.addEventListener('keyup',(e)=>{
             break
         case("d"):
             keys.d.pressed = false;
+            break
+        case("x"):
+            keys.x.pressed = false;
             break
     }
 })
