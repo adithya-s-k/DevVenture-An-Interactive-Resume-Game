@@ -4,17 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PortfolioGameProject</title>
+    <title>Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      * {
+        font-family: 'Press Start 2P', cursive;
+      }
         body{
             margin: 0;
             padding: 0;
             background-color: black;
+            overflow-y: hidden; /* Hide vertical scrollbar */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+        .example::-webkit-scrollbar {
+            display: none;
+        }
+        
+          /* Hide scrollbar for IE, Edge and Firefox */
+        .example {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .controlBar{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            margin: 20px;
+        }
+        button{
+            width:100px;
+            height:100px;
         }
     </style>
 </head>
 <body>
-    <canvas style="overflow:hidden ;"></canvas>
+    <div style="position:relative;">
+        <canvas></canvas>
+        <div class="controlBar">
+            <button>UP</button>
+            <button>LEFT</button>
+            <button>RIGHT</button>
+            <button>DOWN</button>
+        </div>
+    </div>
     <script src="./assets/data/collisions.js"></script>
     <script src="./classes.js"></script>
     <script src="./index.js"></script>

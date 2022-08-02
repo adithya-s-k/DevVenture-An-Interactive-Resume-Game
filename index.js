@@ -2,8 +2,8 @@ const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d')
 
-canvas.width=window.innerWidth-5
-canvas.height=window.innerHeight-5
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
 
 // creating an offset so that the map is centers
 // made the offset of the background responsive and will always be in center no matter the screen size
@@ -37,9 +37,6 @@ collisionMap.forEach((row,i)=>{
 const image = new Image();
 image.src = "./assets/images/map.png";
 
-const playerImage = new Image();
-playerImage.src = "./assets/images/playerDown.png";
-
 const foregroundImage = new Image()
 foregroundImage.src = './assets/images/foregroundObjects.png'
 
@@ -72,13 +69,19 @@ const player = new Sprite({
         x:canvas.width/2 - 192/8,
         y:canvas.height/2 - 68/2
     },
-    image :playerImage,
+    image :playerDownImage,
     frames:{
         max:4,
-        hold: 10
+        hold: 7
     },
     width:192,
     height:68,
+    sprites: {
+        up: playerUpImage,
+        left: playerLeftImage,
+        right: playerRightImage,
+        down: playerDownImage
+      }
 })
 
 const foreground = new Sprite({
@@ -86,7 +89,9 @@ const foreground = new Sprite({
       x: offset.x,
       y: offset.y
     },
-    image: foregroundImage
+    image: foregroundImage,
+    width:3360,
+    height:1920
   })
 
 let lastKey = '';
@@ -112,7 +117,7 @@ const softedge = {
     x:25,
     y:25
 }
-const speed = 7
+const speed = 6
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
@@ -136,11 +141,28 @@ function animate(){
         }
     })
     player.draw()
-    foreground.draw()
+    function moveup() {
+        keys.w.pressed = true;
+      }
+      
+      function movedown() {
+        keys.s.pressed = true;
+      }
+      
+      function moveleft() {
+        keys.a.pressed = true;
+      }
+      
+      function moveright() {
+        keys.d.pressed = true;
+      }
 
     let moving = true
+    player.moving = false
 
     if (keys.w.pressed && lastKey === 'w') {    
+        player.moving = true
+        player.image = playerUpImage
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if (
@@ -166,7 +188,11 @@ function animate(){
             })
         }    
 
+        
+
     else if (keys.a.pressed && lastKey === 'a') {
+        player.moving = true
+        player.image = playerLeftImage
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if (
@@ -192,7 +218,8 @@ function animate(){
             })
         } 
         else if (keys.s.pressed && lastKey === 's') {
-
+            player.moving = true
+            player.image = playerDownImage
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if (
@@ -218,7 +245,8 @@ function animate(){
             })
         } 
     else if (keys.d.pressed && lastKey === 'd') {
-    
+        player.moving = true
+        player.image = playerRightImage
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i]
             if (
@@ -243,15 +271,59 @@ function animate(){
             movable.position.x -= speed
             })
         }
-
+        foreground.draw()
 }
 animate()
+
+document.querySelectorAll('button').forEach((button) =>{
+    button.addEventListener('mousedown',(e) =>{
+        switch(e.currentTarget.innerHTML){
+            case("UP"):
+                keys.w.pressed = true;
+                lastKey = "w";
+                break
+            case("LEFT"):
+                keys.a.pressed = true;
+                lastKey  = "a";
+                break
+            case("DOWN"):
+                keys.s.pressed = true;
+                lastKey = "s";
+                break
+            case("RIGHT"):
+                keys.d.pressed = true;
+                lastKey = "d";
+                break
+        }
+    })
+})
+
+document.querySelectorAll('button').forEach((button) =>{
+    button.addEventListener('mouseup',(e) =>{
+        switch(e.currentTarget.innerHTML){
+            case("UP"):
+                keys.w.pressed = false;
+                break
+            case("LEFT"):
+                keys.a.pressed = false;
+                break
+            case("DOWN"):
+                keys.s.pressed = false;
+                break
+            case("RIGHT"):
+                keys.d.pressed = false;
+
+                break
+        }
+    })
+})
 
 window.addEventListener('keydown',(e)=>{
     switch(e.key){
         case("w"):
             keys.w.pressed = true;
             lastKey = "w";
+            
             break
         case("a"):
             keys.a.pressed = true;
@@ -266,6 +338,7 @@ window.addEventListener('keydown',(e)=>{
             lastKey = "d";
             break
     }
+    
 })
 
 window.addEventListener('keyup',(e)=>{
