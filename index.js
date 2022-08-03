@@ -177,17 +177,17 @@ function animate(){
             //deactivate current animation loop
             window.cancelAnimationFrame(animationId)
             
-            gsap.to('#flash',{
-                opacity :1,
-                repeat : 3,
-                yoyo : true,
-                duration : 0.2,
-                onComplete(){
-                    gsap.to('#flash',{
-                        opacity:0,
-                        duration:0.4
-                })}
-            })
+            // gsap.to('#flash',{
+            //     opacity :1,
+            //     repeat : 7,
+            //     yoyo : true,
+            //     duration : 1.0,
+            //     onComplete(){
+            //         gsap.to('#flash',{
+            //             opacity:1,
+            //             duration:0.4
+            //     })}
+            // })
             // activate new animation
             location.href = 'html2.html';
         }
