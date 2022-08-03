@@ -1,3 +1,102 @@
 {
-    "last.exportedFilePath": "C:/Users/adith/Downloads/pokemon-style-game-main"
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/Pellet Town.tmx",
+    "expandedProjectPaths": [
+        "Game_map",
+        "."
+    ],
+    "fileStates": {
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/base tile.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.75
+        },
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/decor.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmas.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmass2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 23
+        },
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmass32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmass8.tsx": {
+            "scaleInEditor": 3
+        },
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/Pellet Town.tmx": {
+            "expandedGroupLayers": [
+                17
+            ],
+            "scale": 0.75,
+            "selectedLayer": 16,
+            "viewCenter": {
+                "x": 530.6666666666666,
+                "y": 405.33333333333337
+            }
+        },
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/collisionTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/pokemonStyleGameTileset.tsx": {
+            "scaleInDock": 1
+        },
+        "Game_map/Map_assets.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "Game_map/collision.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Game_map/map.tmx": {
+            "expandedGroupLayers": [
+                10
+            ],
+            "scale": 4,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 257,
+                "y": 226.75
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/adith/Downloads/pokemon-style-game-main",
+    "last.imagePath": "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/sheets/housing",
+    "map.height": 120,
+    "map.tileHeight": 4,
+    "map.tileWidth": 4,
+    "map.width": 210,
+    "openFiles": [
+        "Game_map/Map_assets.tsx",
+        "Game_map/map.tmx",
+        "Game_map/collision.tsx",
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/Pellet Town.tmx"
+    ],
+    "project": "Project_map.tiled-project",
+    "recentFiles": [
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmass8.tsx",
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmas.tsx",
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/decor.tsx",
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmass2.tsx",
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/landmass32.tsx",
+        "C:/Users/adith/Downloads/SmallBurg_village_pack_v1.17_free/base tile.tsx",
+        "Game_map/Map_assets.tsx",
+        "Game_map/map.tmx",
+        "C:/Users/adith/Downloads/pokemon-style-game-main/Chris Courses - Pokemon/Tiled/Pellet Town.tmx",
+        "Game_map/collision.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 4,
+        "width": 4
+    }
 }

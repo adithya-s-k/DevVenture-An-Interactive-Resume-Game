@@ -38,21 +38,38 @@
             margin: 20px;
         }
         button{
-            width:100px;
-            height:100px;
+            width:70px;
+            height:50px;
+        }
+        .flash{
+            position:absolute;
+            background-color: black;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .instructions{
+            position: absolute;
+            background-color: grey;
         }
     </style>
 </head>
 <body>
-    <div style="position:relative;">
+    <div>
+    <div class="flash" id='flash'></div>
         <canvas></canvas>
         <div class="controlBar">
+            <h3>WASD for controls</h3>
+            <h3>Stand in front of house and press X to teleport</h3>    
             <button>UP</button>
             <button>LEFT</button>
             <button>RIGHT</button>
             <button>DOWN</button>
+            <button>x</button>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/data/collisions.js"></script>
     <script src="./assets/data/teleport.js"></script>
     <script src="./classes.js"></script>
