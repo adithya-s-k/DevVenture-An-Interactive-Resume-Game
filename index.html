@@ -18,21 +18,21 @@
         body{
             margin: 0;
             padding: 0;
-            background-color: black;
-            overflow-y: hidden; /* Hide vertical scrollbar */
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            background-color: white;
+            /*overflow-y: hidden;  Hide vertical scrollbar */
+            /*overflow-x: hidden;  Hide horizontal scrollbar */
         }
+        /*
         .example::-webkit-scrollbar {
             display: none;
         }
-        
-          /* Hide scrollbar for IE, Edge and Firefox */
+
         .example {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }*/
         .controlBar{
-            position: absolute;
+            /*position: absolute;*/
             left: 0;
             bottom: 0;
             margin: 20px;
@@ -53,12 +53,18 @@
             position: absolute;
             background-color: grey;
         }
+        .joystick{
+            position: fixed; 
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+            color:rgb(128, 128, 128);
+            font-size: xx-large;
+        }
     </style>
 </head>
 <body>
     <div>
     <div class="flash" id='flash'></div>
-        <canvas></canvas>
+        <canvas id="mainFrame"></canvas>
         <div class="controlBar">
             <h3>WASD for controls</h3>
             <h3>Stand in front of house and press X to teleport</h3>    
@@ -69,10 +75,24 @@
             <button>x</button>
         </div>
     </div>
+    <div class="controlBar">
+        <p style="text-align: center;">
+            X: <span id="x_coordinate"> </span>
+            Y: <span id="y_coordinate"> </span>
+            Speed: <span id="speed"> </span> %
+            Angle: <span id="angle"> </span>
+        </p>
+        <canvas id="joystick" name="game"></canvas>
+    </div>
+    <script>
+
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./assets/data/collisions.js"></script>
     <script src="./assets/data/teleport.js"></script>
     <script src="./classes.js"></script>
     <script src="./index.js"></script>
+    <script src="./joystick.js"></script>
 </body>
 </html>
