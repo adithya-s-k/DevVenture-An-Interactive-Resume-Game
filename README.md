@@ -20,7 +20,7 @@ DevVenture is more than just a game; it's an immersive experience that allows yo
 
 ## Play the Game
 
-[![Play Now](link-to-game)](https://game.adithyask.com)
+[Play Now](link-to-game)](https://game.adithyask.com)
 
 🔗 [Play Now](https://game.adithyask.com) and embark on your DevVenture journey!
 
